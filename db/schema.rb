@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180617152430) do
+ActiveRecord::Schema.define(version: 20180617173826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "disscussion_topics", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "disscussion_topics_events", force: :cascade do |t|
+    t.bigint "disscussion_topic_id"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["disscussion_topic_id"], name: "index_disscussion_topics_events_on_disscussion_topic_id"
+    t.index ["event_id"], name: "index_disscussion_topics_events_on_event_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "title", null: false
@@ -54,5 +69,7 @@ ActiveRecord::Schema.define(version: 20180617152430) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "disscussion_topics_events", "disscussion_topics"
+  add_foreign_key "disscussion_topics_events", "events"
   add_foreign_key "events", "towns"
 end

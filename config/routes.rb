@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :towns, only: [] do
     resources :events, only: :index, module: :towns
   end
+
+  resources :events, only: :show
 end
