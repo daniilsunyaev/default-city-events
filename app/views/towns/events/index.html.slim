@@ -1,0 +1,8 @@
+.row
+  .columns
+    h2 #{town.name} events
+
+    - events.each do |event|
+      p = event.title
+      p = event.description
+      br
