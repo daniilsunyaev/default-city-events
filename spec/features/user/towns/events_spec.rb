@@ -4,9 +4,9 @@ feature "Sign Out" do
   include_context "current user signed in"
 
   let(:town) { create :town }
-  let(:fishing) { create :event, title: "Fishing" }
-  let(:concert) { create :event, title: "Mr.Default's concert", town: town }
-  let(:concert) { create :event, title: "Default town birthday", town: town }
+  let!(:fishing) { create :event, title: "Fishing" }
+  let!(:concert) { create :event, title: "Mr.Default's concert", town: town }
+  let!(:birthday) { create :event, title: "Default town birthday", town: town }
 
   scenario "User signs out" do
     visit town_events_path(town)

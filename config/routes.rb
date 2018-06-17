@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :towns, only: [] do
-    resources :events, only: :index
+    resources :events, only: :index, module: :towns
   end
 end
