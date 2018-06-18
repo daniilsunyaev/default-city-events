@@ -6,3 +6,7 @@
       p = event.title
       p = event.description
       br
+
+    = simple_form_for filter, url: town_events_path(town), method: :get do |f|
+      = f.association :town, label_method: :name
+      = f.submit "Apply Filter"

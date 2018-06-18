@@ -22,4 +22,13 @@ describe Events::FilteredQuery do
       expect(filtered_events).to eq default_events
     end
   end
+
+  context "when filter is provided" do
+    let(:filter) { build :filter, town: town }
+    let(:query_options) { { filter: filter } }
+
+    it "returns events associated with town" do
+      expect(filtered_events).to eq default_events
+    end
+  end
 end

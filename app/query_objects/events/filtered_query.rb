@@ -17,7 +17,11 @@ module Events
     end
 
     def town
-      @options[:town]
+      @options[:town] || filter && filter.town
+    end
+
+    def filter
+      @options[:filter]
     end
   end
 end
