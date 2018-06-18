@@ -1,4 +1,4 @@
-class DiscussionTopic < ApplicationRecord
+class Topic < ApplicationRecord
   has_many :discussions
   has_many :events, through: :discussions
 

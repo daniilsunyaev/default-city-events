@@ -1,0 +1,8 @@
+.row
+  .columns
+    h2 = topic.name
+
+    - comments.each do |comment|
+      p = comment.user_full_name
+      p = comment.text
+      br

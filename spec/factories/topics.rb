@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :disscussion_topic do
+  factory :topic do
     name { Faker::Lorem.word }
   end
 end

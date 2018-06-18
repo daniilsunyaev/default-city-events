@@ -3,5 +3,5 @@ class Event < ApplicationRecord
 
   belongs_to :town
   has_many :discussions, dependent: :destroy
-  has_many :discussion_topics, through: :discussions
+  has_many :topics, through: :discussions
 end

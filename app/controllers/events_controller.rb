@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   expose :event
-  expose :disscussion_topics, from: :event
+  expose :topics, from: :event
 
   def show
   end
