@@ -10,24 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180617173826) do
+ActiveRecord::Schema.define(version: 20180618051607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "disscussion_topics", force: :cascade do |t|
-    t.string "name", null: false
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "discussion_id"
+    t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["discussion_id"], name: "index_comments_on_discussion_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "disscussion_topics_events", force: :cascade do |t|
-    t.bigint "disscussion_topic_id"
+  create_table "discussions", force: :cascade do |t|
+    t.bigint "topic_id"
     t.bigint "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["disscussion_topic_id"], name: "index_disscussion_topics_events_on_disscussion_topic_id"
-    t.index ["event_id"], name: "index_disscussion_topics_events_on_event_id"
+    t.index ["event_id"], name: "index_discussions_on_event_id"
+    t.index ["topic_id"], name: "index_discussions_on_topic_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -41,6 +45,12 @@ ActiveRecord::Schema.define(version: 20180617173826) do
     t.index ["town_id"], name: "index_events_on_town_id"
   end
 
+  create_table "topics", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "towns", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -48,28 +58,30 @@ ActiveRecord::Schema.define(version: 20180617173826) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", limit: 255, default: "", null: false
-    t.string "encrypted_password", limit: 255, default: "", null: false
-    t.string "reset_password_token", limit: 255
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "confirmation_token", limit: 255
+    t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email", limit: 255
+    t.string "unconfirmed_email"
     t.integer "sign_in_count", default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip", limit: 255
-    t.string "last_sign_in_ip", limit: 255
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "full_name", limit: 255
+    t.string "full_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "disscussion_topics_events", "disscussion_topics"
-  add_foreign_key "disscussion_topics_events", "events"
+  add_foreign_key "comments", "discussions"
+  add_foreign_key "comments", "users"
+  add_foreign_key "discussions", "events"
+  add_foreign_key "discussions", "topics"
   add_foreign_key "events", "towns"
 end

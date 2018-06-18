@@ -5,19 +5,19 @@ feature "Event page" do
 
   let!(:event) { create :event, title: "Default city ceremonial renaming" }
   let!(:flame) do
-    create :disscussion_topic,
+    create :topic,
       name: "Flaming",
       events: [event]
   end
 
   let!(:flood) do
-    create :disscussion_topic,
+    create :topic,
       name: "Flood",
       events: [event]
   end
 
   let!(:mp3) do
-    create :disscussion_topic,
+    create :topic,
       name: "Download mp3 without registration"
   end
 
