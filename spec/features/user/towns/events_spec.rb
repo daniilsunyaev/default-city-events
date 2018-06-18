@@ -6,6 +6,12 @@ feature "List of events in the town" do
   let(:default_city) { create :town, name: "Dafault city" }
   let(:midtown) { create :town, name: "Midtown" }
   let!(:fishing) { create :event, title: "Fishing", town: midtown }
+  let!(:expired_event) do
+    create :event,
+      title: "October revolution",
+      town: midtown,
+      starts_at: 100.years.ago
+  end
   let!(:concert) { create :event, title: "Mr.Default's concert", town: default_city }
   let!(:birthday) { create :event, title: "Default city birthday", town: default_city }
 
@@ -21,9 +27,12 @@ feature "List of events in the town" do
     visit town_events_path(default_city)
 
     select "Midtown", from: "Town"
+    select "2017", from: "filter_min_starts_at_1i"
+    select "2020", from: "filter_max_starts_at_1i"
     click_button "Apply Filter"
 
     expect(page).to have_content("Fishing")
+    expect(page).not_to have_content("October revolution")
     expect(page).not_to have_content("Mr.Default's concert")
     expect(page).not_to have_content("Default city birthday")
   end

@@ -19,11 +19,11 @@ class EventsController < ApplicationController
 
       Events::FilteredQuery.new(filter: filter).all
     else
-      town.events
+      Event.all
     end
   end
 
   def filter_params
-    params[:filter].permit(:town_id)
+    params[:filter].permit(:town_id, :max_starts_at, :min_starts_at)
   end
 end

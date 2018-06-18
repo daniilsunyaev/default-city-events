@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180618081928) do
+ActiveRecord::Schema.define(version: 20180618093553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20180618081928) do
     t.bigint "town_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "min_starts_at"
+    t.datetime "max_starts_at"
     t.index ["town_id"], name: "index_filters_on_town_id"
   end
 
