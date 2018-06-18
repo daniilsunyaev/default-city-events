@@ -4,7 +4,7 @@ class Comment < ApplicationRecord
   has_one :event, through: :discussion
   has_one :topic, through: :discussion
 
-  validates :user, :text, :topic, :event, presence: true
+  validates :user, :text, :discussion, presence: true
 
   delegate :full_name, to: :user, prefix: true
 end

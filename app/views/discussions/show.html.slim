@@ -6,3 +6,8 @@
       p = comment.user_full_name
       p = comment.text
       br
+
+    = simple_form_for :comment, url: discussion_comments_path(discussion) do |f|
+      = f.input :text
+      = f.button :submit
+
