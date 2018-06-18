@@ -19,7 +19,7 @@ class EventsController < ApplicationController
 
       Events::FilteredQuery.new(filter: filter).all
     else
-      town.events
+      Event.all
     end
   end
 

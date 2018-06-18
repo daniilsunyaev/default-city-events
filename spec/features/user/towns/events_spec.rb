@@ -6,6 +6,13 @@ feature "List of events in the town" do
   let(:default_city) { create :town, name: "Dafault city" }
   let(:midtown) { create :town, name: "Midtown" }
   let!(:fishing) { create :event, title: "Fishing", town: midtown }
+  let!(:expired_event) do
+    create :event,
+      title: "October revolution",
+      town: midtown,
+      min_starts_at: 100.years.ago,
+      max_starts_at: 90.years.ago
+  end
   let!(:concert) { create :event, title: "Mr.Default's concert", town: default_city }
   let!(:birthday) { create :event, title: "Default city birthday", town: default_city }
 
