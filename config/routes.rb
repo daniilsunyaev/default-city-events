@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :events, only: :index, module: :towns
   end
 
-  resources :events, only: :show
+  resources :events, only: %i[show index]
   resources :discussions, only: :show do
     resources :comments, only: :create, module: :discussions
   end
