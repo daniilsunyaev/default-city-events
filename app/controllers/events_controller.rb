@@ -24,6 +24,6 @@ class EventsController < ApplicationController
   end
 
   def filter_params
-    params[:filter].permit(:town_id, :max_starts_at, :min_starts_at)
+    params[:filter].permit(:town_id, :topic_id, :max_starts_at, :min_starts_at)
   end
 end
