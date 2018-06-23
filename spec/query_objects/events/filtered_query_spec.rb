@@ -3,9 +3,11 @@ require "rails_helper"
 describe Events::FilteredQuery do
   subject(:filtered_events) { described_class.new(query_options).all }
 
+  let(:default_topic) { create :topic, name: "Default topic" }
+  let(:custom_topic) { create :topic, name: "Custom topic" }
   let(:town) { create :town, name: "Default city" }
-  let!(:default_events) { create_list :event, 2, town: town }
-  let!(:other_events) { create_list :event, 2 }
+  let!(:default_events) { create_list :event, 2, town: town, topics: [default_topic] }
+  let!(:other_events) { create_list :event, 2, topics: [custom_topic, default_topic] }
   let!(:expired_event) { create :event, starts_at: 1.year.ago, town: town }
 
   context "when no options is provided" do
@@ -21,6 +23,14 @@ describe Events::FilteredQuery do
 
     it "returns events associated with town" do
       expect(filtered_events).to match_array(default_events + [expired_event])
+    end
+  end
+
+  context "when specific topic is provided" do
+    let(:query_options) { { topic: default_topic } }
+
+    it "returns events associated with topc" do
+      expect(filtered_events).to match_array(default_events+other_events)
     end
   end
 
