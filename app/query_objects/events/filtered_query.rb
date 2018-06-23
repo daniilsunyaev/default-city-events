@@ -9,6 +9,7 @@ module Events
       by_town
       by_min_starts_at
       by_max_starts_at
+      by_topic
     end
 
     private
@@ -26,6 +27,15 @@ module Events
     def by_max_starts_at
       return @relation if max_starts_at.blank?
       @relation = @relation.where("starts_at < ?", max_starts_at)
+    end
+
+    def by_topic
+      return @relation if topic.blank?
+      @relation = @relation.includes(:discussions).where(discussions: { topic: topic })
+    end
+
+    def topic
+      @options[:topic] || filter && filter.topic
     end
 
     def town

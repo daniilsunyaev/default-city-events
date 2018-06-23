@@ -7,8 +7,4 @@
       p = event.description
       br
 
-    = simple_form_for filter, url: events_path, method: :get do |f|
-      = f.association :town, label_method: :name
-      = f.input :min_starts_at
-      = f.input :max_starts_at
-      = f.submit "Apply Filter"
+    = render "event_filter"

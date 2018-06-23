@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180618093553) do
+ActiveRecord::Schema.define(version: 20180623181823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 20180618093553) do
     t.datetime "updated_at", null: false
     t.datetime "min_starts_at"
     t.datetime "max_starts_at"
+    t.bigint "topic_id"
+    t.index ["topic_id"], name: "index_filters_on_topic_id"
     t.index ["town_id"], name: "index_filters_on_town_id"
   end
 
@@ -93,5 +95,6 @@ ActiveRecord::Schema.define(version: 20180618093553) do
   add_foreign_key "discussions", "events"
   add_foreign_key "discussions", "topics"
   add_foreign_key "events", "towns"
+  add_foreign_key "filters", "topics"
   add_foreign_key "filters", "towns"
 end
