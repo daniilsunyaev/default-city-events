@@ -5,4 +5,5 @@ class User < ApplicationRecord
   validates :full_name, presence: true
 
   has_many :comments
+  has_many :filters
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180623181823) do
+ActiveRecord::Schema.define(version: 20180624132951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,8 +52,11 @@ ActiveRecord::Schema.define(version: 20180623181823) do
     t.datetime "min_starts_at"
     t.datetime "max_starts_at"
     t.bigint "topic_id"
+    t.string "name", null: false
+    t.bigint "user_id"
     t.index ["topic_id"], name: "index_filters_on_topic_id"
     t.index ["town_id"], name: "index_filters_on_town_id"
+    t.index ["user_id"], name: "index_filters_on_user_id"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -97,4 +100,5 @@ ActiveRecord::Schema.define(version: 20180623181823) do
   add_foreign_key "events", "towns"
   add_foreign_key "filters", "topics"
   add_foreign_key "filters", "towns"
+  add_foreign_key "filters", "users"
 end

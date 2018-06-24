@@ -52,4 +52,22 @@ feature "List of events in the town" do
     expect(page).not_to have_content("Mr.Default's concert")
     expect(page).not_to have_content("Default city birthday")
   end
+
+  scenario "User saves a filter for future use", js: true do
+    visit town_events_path(default_city)
+    choose("Save Filter")
+
+    select "Midtown", from: "Town"
+    select "2017", from: "filter_min_starts_at_1i"
+    select "2020", from: "filter_max_starts_at_1i"
+    select "Relax", from: "Topic"
+    fill_in "Filter Name", with: "Midtown relax filter"
+    click_button "Save Filter"
+
+    expect(page).to have_content "Filter was successfully saved"
+    filter = current_user.filters.last
+    expect(filter.town).to eq midtown
+    expect(filter.topic).to eq topic
+    expect(filter.name).to eq "Midtown relax filter"
+  end
 end
