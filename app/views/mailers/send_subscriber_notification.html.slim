@@ -1,0 +1,7 @@
+.row
+  .columns
+    h4 = "There is new event matching your filters"
+    br
+    p = @event.title
+    p
+      matches following filter(s): #{@filter_names.join(", "))}

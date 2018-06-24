@@ -30,6 +30,7 @@ gem "slim"
 # all other gems
 gem "decent_decoration"
 gem "decent_exposure"
+gem "delayed_job_active_record"
 gem "devise"
 gem "draper"
 gem "flamegraph"
