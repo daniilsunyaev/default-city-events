@@ -30,7 +30,7 @@ describe Events::FilteredQuery do
     let(:query_options) { { topic: default_topic } }
 
     it "returns events associated with topc" do
-      expect(filtered_events).to match_array(default_events+other_events)
+      expect(filtered_events).to match_array(default_events + other_events)
     end
   end
 

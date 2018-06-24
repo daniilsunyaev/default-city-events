@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   resources :discussions, only: :show do
     resources :comments, only: :create, module: :discussions
   end
+  resources :filters, only: :create
 end

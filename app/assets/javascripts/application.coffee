@@ -8,6 +8,7 @@
 #= require jquery-ujs
 #= require foundation
 #= require current_user
+#= require event_filter_form
 #= require_tree ../templates
 #= require_tree .
 
