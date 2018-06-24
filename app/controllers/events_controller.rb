@@ -3,7 +3,7 @@ class EventsController < ApplicationController
 
   expose :event
   expose :discussions, -> { event.discussions.includes(:topic) }
-  expose :filter, id: :filter_id
+  expose :filter, id: -> { params[:filter_id] || params[:filter] && params[:filter][:id] }
 
   def show
   end
@@ -15,7 +15,7 @@ class EventsController < ApplicationController
 
   def fetch_events
     if params[:filter].present?
-      filter.new_record? && filter = Filter.new(filter_params)
+      filter.new_record? && self.filter = Filter.new(filter_params)
 
       Events::FilteredQuery.new(filter: filter).all
     else

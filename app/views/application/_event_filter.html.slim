@@ -2,15 +2,28 @@
   = radio_button_tag "filter_type", "apply", true, id: "js-apply-filter",
     data: { url: events_path, method: "get" }
   = label_tag "js-apply-filter", "Apply Filter"
+
   = radio_button_tag "filter_type", "save", false, id: "js-save-filter",
     data: { url: filters_path, method: "post" }
   = label_tag "js-save-filter", "Save Filter"
 
+  = radio_button_tag "filter_type", "load", false, id: "js-load-filter",
+    data: { url: events_path, method: "get" }
+  = label_tag "js-load-filter", "Load Filter"
 
   = f.input :name, label: "Filter Name", disabled: true,
     input_html: { id: "js-filter-name" }
-  = f.association :town, label_method: :name
-  = f.association :topic, label_method: :name
-  = f.input :min_starts_at
-  = f.input :max_starts_at
+
+  = label_tag "js-select-filter", "Select Existing Filter"
+  = f.select :id,
+    current_user.filters.collect { |f| [f.name, f.id] },
+    { include_blank: false },
+    { id: "js-select-filter" }
+
+  #js-filter-fields
+    = f.association :town, label_method: :name
+    = f.association :topic, label_method: :name
+    = f.input :min_starts_at
+    = f.input :max_starts_at
+
   = f.submit "Apply Filter"
