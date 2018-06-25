@@ -18,6 +18,10 @@ describe NotifySubscribersJob do
   let(:event) { create :event }
 
   describe "#perform_now" do
+    subject(:job_call) do
+      described_class.perform_now(event_id: event.id)
+    end
+
     before do
       allow(Events::MatchingFiltersQuery)
         .to receive(:new).with(event) { matching_filters }
@@ -26,10 +30,6 @@ describe NotifySubscribersJob do
     let(:matching_filters) do
       instance_double "Events::MatchingFiltersQuery",
         all: Filter.where(id: matching_filters_ids)
-    end
-
-    subject(:job_call) do
-      described_class.perform_now(event_id: event.id)
     end
 
     it "sends an email to all subscriber with matching filters" do

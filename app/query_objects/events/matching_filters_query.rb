@@ -25,19 +25,19 @@ module Events
     def by_min_starts_at
       return @relation if @event.starts_at.blank?
       @relation = @relation
-        .where("min_starts_at < ?", @event.starts_at)
-        .or(
-          @relation.where(min_starts_at: nil)
-        )
+                  .where("min_starts_at < ?", @event.starts_at)
+                  .or(
+                    @relation.where(min_starts_at: nil)
+                  )
     end
 
     def by_max_starts_at
       return @relation if @event.starts_at.blank?
       @relation = @relation
-        .where("max_starts_at > ?", @event.starts_at)
-        .or(
-          @relation.where(max_starts_at: nil)
-        )
+                  .where("max_starts_at > ?", @event.starts_at)
+                  .or(
+                    @relation.where(max_starts_at: nil)
+                  )
     end
 
     def topics_ids
