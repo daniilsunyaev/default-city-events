@@ -3,6 +3,7 @@ class SubscriberMailer < ApplicationMailer
     @subscriber = options[:subscriber]
     @event = options[:event]
     @filters = options[:filters]
+    @filter_names = @filters.map(&:name)
 
     mail subject: "New Event matching your filter",
       to: @subscriber.email
